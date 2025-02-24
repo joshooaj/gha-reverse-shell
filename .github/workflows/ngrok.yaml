@@ -1,0 +1,16 @@
+name: Start ngrok endpoint
+
+on: [workflow_dispatch]
+
+jobs:
+  debug:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+            fetch-depth: 0
+
+      - name: Start Endpoint
+        shell: powershell
+        run: ./start-endpoint.ps1
