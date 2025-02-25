@@ -27,4 +27,6 @@ jobs:
 
       - name: Start xterm
         shell: powershell
-        run: node xterm-backend.js
+        run: |
+            npm install
+            node xterm-backend.js
