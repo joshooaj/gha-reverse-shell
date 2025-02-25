@@ -1,0 +1,30 @@
+name: Start ngrok endpoint
+
+on: [workflow_dispatch]
+
+jobs:
+  debug:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+            fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+            node-version: 18
+
+      - name: Setup cloudflared
+        uses: AnimMouse/setup-cloudflared@v2
+            
+      - name: Setup cloudflared tunnel
+        uses: AnimMouse/setup-cloudflared/tunnel@v2
+        with:
+            cloudflare_tunnel_credential: ${{ secrets.CLOUDFLARE_TUNNEL_CREDENTIAL }}
+            cloudflare_tunnel_configuration: ${{ secrets.CLOUDFLARE_TUNNEL_CONFIGURATION }}
+            cloudflare_tunnel_id: ${{ secrets.CLOUDFLARE_TUNNEL_ID }}
+
+      - name: Start xterm
+        shell: powershell
+        run: node xterm-backend.js
