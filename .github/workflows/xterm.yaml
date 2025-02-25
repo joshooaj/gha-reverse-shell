@@ -1,4 +1,4 @@
-name: Start ngrok endpoint
+name: Start xterm
 
 on: [workflow_dispatch]
 
